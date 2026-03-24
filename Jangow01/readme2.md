@@ -86,8 +86,6 @@ The result was:
 This confirmed that I had remote command execution as the web server user.
 </p>
 
-<p><strong>φωτο απο whoami</strong></p>
-
 <hr>
 
 <h2>4. Credential Discovery</h2>
@@ -98,7 +96,8 @@ One of the first directories I checked was the web root:
 
 <pre><code>ls -la /var/www/html</code></pre>
 
-<p><strong>φωτο απο ls -la /var/www/html</strong></p>
+<img width="968" height="249" alt="list files www" src="https://github.com/user-attachments/assets/f55a0953-12e7-4e8c-8cf8-fe93faf2c1cc" />
+
 
 <p>
 During enumeration, I discovered a hidden file:
@@ -117,7 +116,8 @@ This was an important finding because it provided a path to move from the web us
 to a real local user account.
 </p>
 
-<p><strong>φωτο απο backup file / credentials</strong></p>
+<img width="1264" height="210" alt="image" src="https://github.com/user-attachments/assets/d049c050-75a5-4434-9e6e-d2f942c8399a" />
+
 
 <hr>
 
