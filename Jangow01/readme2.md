@@ -54,9 +54,6 @@ This parameter appeared to accept user-controlled input directly through the URL
 so it became the main attack surface.
 </p>
 <br><img width="1056" height="70" alt="parameter_url" src="https://github.com/user-attachments/assets/697b75c6-c5df-4ec7-ab07-f0e3c30ba487" />
-<img width="1280" height="330" alt="echo test" src="https://github.com/user-attachments/assets/374a8cac-df2b-4d88-b999-3834ec012c67" />
-
-
 
 <hr>
 
@@ -71,7 +68,7 @@ To understand how the parameter behaved, I tested it with a simple command:
 The output was reflected back in the page, which suggested command execution.
 </p>
 
-<p><strong>φωτο απο echo test</strong></p>
+<img width="1280" height="330" alt="echo test" src="https://github.com/user-attachments/assets/374a8cac-df2b-4d88-b999-3834ec012c67" />
 
 <p>
 To verify the execution context, I used:
