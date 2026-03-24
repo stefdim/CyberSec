@@ -60,22 +60,34 @@ With command execution available, I started exploring the system:
 <img width="968" height="249" alt="list files www" src="https://github.com/user-attachments/assets/bc8389e0-5f28-43e3-88a0-3c428888f7ae" /> <img width="1311" height="595" alt="ls wordpress" src="https://github.com/user-attachments/assets/3ef68e24-cecf-41d9-b293-9dbcb82bcb06" /><img width="1135" height="475" alt="cat config" src="https://github.com/user-attachments/assets/b25fe678-3c31-467c-bbce-46353332fdf9" />
 
 
-I discovered a hidden file:
+Various file discovered: .backup, wordpress/config.php
 
-.backup
 
-Reading it revealed credentials:<br><img width="1264" height="210" alt="backup info" src="https://github.com/user-attachments/assets/476104cd-8d8d-419f-aa8b-e965b18513e6" />
+
+Info revealed:<br><img width="1264" height="210" alt="backup info" src="https://github.com/user-attachments/assets/476104cd-8d8d-419f-aa8b-e965b18513e6" />
 <img width="1063" height="416" alt="cat backup" src="https://github.com/user-attachments/assets/42939099-069c-4649-a5f6-a772f33c6276" />
 
-<U><strong>Commands used:
-<li>ls -la /var/www/html</li>
 
 # STEP 5
 <b>User Access
 
 Using the credentials:
 
+<br><img width="538" height="444" alt="logedinJangow" src="https://github.com/user-attachments/assets/52e2da5b-1ff0-40e3-87b0-957ac59f988e" />
+<br> I used the credentials i discovered to loged in to ftp 10.0.2.15
+<br>I granted access using jangow01 : abygurl69 
+<br>navigate to files reveales some interesting info 
+<br><img width="1099" height="385" alt="getUser" src="https://github.com/user-attachments/assets/4efd0512-eb56-4cfe-bdc9-b17d8070f935" />
 
+
+# STEP 6
+<B> Priviledges test
+
+Testing jangow01 priviledges/permisions:
+<br> <img width="1162" height="611" alt="Screenshot 2026-03-23 154910" src="https://github.com/user-attachments/assets/3e0bbf0b-696b-47a7-8f4c-cac1bfc5efeb" />
+<br> Jangow01 is not a root user , failing to put files
+
+<br>Conclusion: At this point i had valid credentials for a not root user,so i need to escalate the priviledges to root .
 
 
 su jangow01
