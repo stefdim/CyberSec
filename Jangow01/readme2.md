@@ -37,7 +37,8 @@ The scan revealed the following open ports:
 Since a web service was available, I decided to focus on HTTP first.
 </p>
 
-<p><strong>φωτο απο nmap</strong></p>
+<br><img width="484" height="90" alt="Screenshot 2026-03-23 121055" src="https://github.com/user-attachments/assets/a7a2445e-2682-4af7-afa3-952aa7ebcabb" />
+
 
 <hr>
 
