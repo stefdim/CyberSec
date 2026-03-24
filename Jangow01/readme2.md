@@ -98,7 +98,8 @@ This confirmed remote command execution as the web server user.
 <h2>4. Reverse Shell</h2>
 
 <p>
-To gain a more interactive shell, I set up a listener on my machine:
+While command execution was possible through the web interface, interaction was limited. 
+To gain a more stable and interactive shell, I needed to establish a reverse shell.
 </p>
 
 <pre><code>nc -lvnp 443</code></pre>
@@ -120,6 +121,7 @@ After executing the payload, I received a shell on my listener.
 <p>
 To stabilize the shell:
 </p>
+<img width="1076" height="150" alt="image" src="https://github.com/user-attachments/assets/50e612b4-3200-4879-a254-19eae8dd7477" />
 
 <pre><code>python3 -c 'import pty; pty.spawn("/bin/bash")'</code></pre>
 
@@ -308,6 +310,18 @@ cat proof.txt
 </ul>
 
 <hr>
+<hr>
+
+<h2>Additional Findings</h2>
+
+<p>
+During the enumeration process, I identified a <code>user.txt</code> file through FTP access.
+</p>
+
+<p>
+Although it appeared to be a flag or important artifact, it did not contribute to further exploitation
+or privilege escalation.
+</p>
 
 <h2>Key Takeaways</h2>
 
