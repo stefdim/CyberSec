@@ -20,16 +20,18 @@ First, I performed a basic Nmap scan to identify open ports and services:
 nmap -sV 10.0.2.15
 ```
 <br><img width="492" height="98" alt="Screenshot 2026-03-23 121055" src="https://github.com/user-attachments/assets/1fc624b5-fd12-4742-b9d7-f45cefab2931" />
-Open Ports : 
+<br>Open Ports : 
 <li>21 → FTP (vsftpd 3.0.3)
 <li>80 → HTTP (Apache 2.4.18)
 
-Flag used -> -sV to detect services. We could proceed with more detailed scan but at this point is not necessary since we already found that a web service is available (80 → HTTP (Apache 2.4.18)) so we may start with web enumeration.
+Flag used -> -sV to detect services. <br>We could proceed with more detailed scan but at this point is not necessary since we already found that a web service is available (80 → HTTP (Apache 2.4.18)) so we may start with web enumeration.
 
 # STEP 2.
 Web Exploration
 
-Navigating to the website, I found the following endpoint:
+Navigating to the website:
+<br><img width="757" height="435" alt="browser_jangow01" src="https://github.com/user-attachments/assets/355610a0-d65f-416f-bcc5-b1db7204502f" />
+
 
 /site/busque.php?buscar=
 
