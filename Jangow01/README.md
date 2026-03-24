@@ -248,7 +248,7 @@ This is an outdated kernel with known privilege escalation vulnerabilities.
 I initially tested one exploit, but it was unstable and kept retrying.
 So I switched to another exploit compatible with this kernel.
 </p>
-<p><strong><img width="1166" height="520" alt="Screenshot 2026-03-23 231134" src="https://github.com/user-attachments/assets/31e01a2a-8a5e-43fd-8224-80f7d0167924" /></strong></p>
+<p><strong><img width="1082" height="120" alt="ploit second" src="https://github.com/user-attachments/assets/5ece2a28-4eb9-4bec-b50f-a1b666ac4d40" /></p>
 <p>
 I compiled and executed the exploit:
 </p>
@@ -259,7 +259,7 @@ chmod +x exploit2
 ./exploit2
 </code></pre>
 
-<p><strong><img width="1082" height="120" alt="ploit second" src="https://github.com/user-attachments/assets/5ece2a28-4eb9-4bec-b50f-a1b666ac4d40" />
+
 </strong></p>
 
 <p>
