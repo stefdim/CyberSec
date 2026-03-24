@@ -8,9 +8,10 @@ The goal is to gain user and root access.
 
 ## Initial Enumeration
 
+Usually jangow01 vulnhub provides the ip when we power up the machine, although we could find it by using netdiscover -i eth0.
 First, I performed a basic Nmap scan to identify open ports and services:
 
-'''bash
+```bash
 nmap -sV 10.0.2.15
 Open Ports
 21 → FTP (vsftpd 3.0.3)
