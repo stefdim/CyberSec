@@ -10,9 +10,10 @@ The goal is to gain user and root access.
 
 Usually jangow01 vulnhub provides the ip when we power up the machine, although we could find it by using 
 ```bash 
-netdiscover -i eth0.
+netdiscover -i eth0
 ```
 First, I performed a basic Nmap scan to identify open ports and services:
+<img width="492" height="98" alt="Screenshot 2026-03-23 121055" src="https://github.com/user-attachments/assets/1fc624b5-fd12-4742-b9d7-f45cefab2931" />
 
 ```bash
 nmap -sV 10.0.2.15
