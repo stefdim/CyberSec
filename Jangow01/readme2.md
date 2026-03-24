@@ -157,7 +157,8 @@ Next, I checked the kernel version to identify possible privilege escalation pat
 
 <pre><code>uname -a</code></pre>
 
-<p><strong>φωτο απο uname -a</strong></p>
+<img width="1154" height="291" alt="image" src="https://github.com/user-attachments/assets/1b43fc74-872f-493b-abbc-0a1b0bab0d2e" />
+
 
 <p>
 The output showed an old Linux kernel:
@@ -186,7 +187,8 @@ I then compiled and executed the working exploit:
 chmod +x exploit
 ./exploit</code></pre>
 
-<p><strong>φωτο απο compile και run exploit</strong></p>
+<img width="1082" height="120" alt="ploit second" src="https://github.com/user-attachments/assets/0b66eb4c-de43-45cb-b51f-ccff156a1909" />
+
 
 <p>
 After execution, the exploit patched the current process credentials and spawned a root shell.
@@ -211,7 +213,8 @@ The output was:
 This confirmed full system compromise.
 </p>
 
-<p><strong>φωτο απο root shell</strong></p>
+<img width="1092" height="461" alt="root" src="https://github.com/user-attachments/assets/e1b8f72b-d9a0-49da-8c6e-59eb2a427574" />
+
 
 <hr>
 
@@ -223,7 +226,8 @@ Finally, I navigated to the root directory and read the proof file:
 <pre><code>cd /root
 cat proof.txt</code></pre>
 
-<p><strong>φωτο απο proof.txt</strong></p>
+<img width="1249" height="675" alt="DONE" src="https://github.com/user-attachments/assets/1f5ec581-f947-4c2c-9000-67b930da8f22" />
+
 
 <hr>
 
