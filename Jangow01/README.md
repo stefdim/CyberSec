@@ -9,6 +9,8 @@ The goal is to gain user and root access.
 ## Initial Enumeration
 
 Usually jangow01 vulnhub provides the ip when we power up the machine, although we could find it by using 
+<br><img width="555" height="112" alt="jango" src="https://github.com/user-attachments/assets/3a178875-8379-466b-bef8-0c0ba3f1f8f3" />
+
 ```bash 
 netdiscover -i eth0
 ```
@@ -22,7 +24,7 @@ nmap -sV 10.0.2.15
 Open Ports
 21 → FTP (vsftpd 3.0.3)
 80 → HTTP (Apache 2.4.18)
-
+```
 Since a web service is available, I decided to start with web enumeration.
 
 Web Exploration
