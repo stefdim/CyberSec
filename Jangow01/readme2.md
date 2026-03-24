@@ -292,7 +292,7 @@ cat proof.txt
 
 <p><strong><img width="1249" height="675" alt="DONE" src="https://github.com/user-attachments/assets/d750311a-1ce4-4a7f-b41d-139e62e17045" />
 </strong></p>
-
+<br><h3> ROOTED </h3>
 <hr>
 
 <h2>Summary</h2>
@@ -310,19 +310,29 @@ cat proof.txt
 </ul>
 
 <hr>
-<hr>
 
 <h2>Additional Findings</h2>
 
 <p>
-During the enumeration process, I identified a <code>user.txt</code> file through FTP access.
+During the interaction with the target system, several local files were created and retrieved
+as part of the exploitation and testing process.
 </p>
 
 <p>
-Although it appeared to be a flag or important artifact, it did not contribute to further exploitation
-or privilege escalation.
+These included:
 </p>
 
+<ul>
+  <li><code>40871.c</code> – initial exploit attempt (unstable)</li>
+  <li><code>45010.c</code> – working privilege escalation exploit</li>
+  <li><code>testCode.txt</code> – test file used to check write capabilities</li>
+  <li><code>user.txt</code> – file retrieved via FTP</li>
+</ul>
+
+<p>
+Although not all of these contributed directly to privilege escalation, they reflect
+important steps during enumeration, testing, and exploitation workflow.
+</p>
 <h2>Key Takeaways</h2>
 
 <ul>
