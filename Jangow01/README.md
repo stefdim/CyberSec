@@ -1,19 +1,33 @@
- Jangow01 - VulnHub Walkthrough
+# Jangow01 - VulnHub Walkthrough
 
 ## Description
-Jangow01 is an easy-level VulnHub machine focused on enumeration and basic exploitation techniques.  
-The goal is to gain user and root access.
+Jangow01 is an easy-level VulnHub machine focused on enumeration, web exploitation, and privilege escalation.
 
 ---
 
-## Initial Enumeration
+## Target Information
+- Target IP: 10.0.2.15
+- Platform: VulnHub
+- Attacker Machine: Kali Linux
 
-Usually jangow01 vulnhub provides the ip when we power up the machine, although we could find it by using 
+---
+
+## 1. Initial Enumeration
+
+I started by performing an Nmap scan to identify open ports and services on the target:
+
+```bash
+nmap -sV 10.0.2.15 
+```
+The scan revealed the following open ports:
+
+21/tcp → FTP
+80/tcp → HTTP
+
+Since a web service was available, I decided to focus on HTTP first.
 <br><img width="555" height="112" alt="jango" src="https://github.com/user-attachments/assets/3a178875-8379-466b-bef8-0c0ba3f1f8f3" />
 
-```bash 
-netdiscover -i eth0
-```
+
 # STEP 1.
 First, I performed a basic Nmap scan to identify open ports and services:
 ```bash
