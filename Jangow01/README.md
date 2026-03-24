@@ -175,7 +175,9 @@ Then I used a reverse shell payload through the vulnerable parameter:
 <p>
 After executing the payload, I received a shell on my listener.
 </p>
-<strong>IMPORTANT NOTE: Payload must be encoded in order to work as expected. I used an online url encoder. <br>
+<strong>IMPORTANT NOTES: <br>
+  <li>Payload must be encoded in order to work as expected. I used an online url encoder.</li> <br>
+  <li>First we run the <code>nc -lvnp 443</code> ant then we use the url parameter entrrance for our encoded payload</li> <br>
 <br><img width="1160" height="326" alt="image" src="https://github.com/user-attachments/assets/79e98c55-e464-40ff-a306-a4365e0f28d9" />
 
 
