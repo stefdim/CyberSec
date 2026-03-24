@@ -9,7 +9,7 @@ Jangow01 is an easy-level VulnHub machine focused on enumeration, web exploitati
 - Target IP: 10.0.2.15
 - Platform: VulnHub
 - Attacker Machine: Kali Linux
-
+<br><img width="555" height="112" alt="jango" src="https://github.com/user-attachments/assets/3a178875-8379-466b-bef8-0c0ba3f1f8f3" />
 ---
 
 ## 1. Initial Enumeration
@@ -21,34 +21,32 @@ nmap -sV 10.0.2.15
 ```
 The scan revealed the following open ports:
 
-21/tcp → FTP
-80/tcp → HTTP
+<li>21/tcp → FTP
+<li></li>80/tcp → HTTP
 
 Since a web service was available, I decided to focus on HTTP first.
-<br><img width="555" height="112" alt="jango" src="https://github.com/user-attachments/assets/3a178875-8379-466b-bef8-0c0ba3f1f8f3" />
-
-
-# STEP 1.
-First, I performed a basic Nmap scan to identify open ports and services:
-```bash
-nmap -sV 10.0.2.15
-```
 <br><img width="492" height="98" alt="Screenshot 2026-03-23 121055" src="https://github.com/user-attachments/assets/1fc624b5-fd12-4742-b9d7-f45cefab2931" />
-<br>Open Ports : 
-<li>21 → FTP (vsftpd 3.0.3)
-<li>80 → HTTP (Apache 2.4.18)
 
-Flag used -> -sV to detect services. <br>We could proceed with more detailed scan but at this point is not necessary since we already found that a web service is available (80 → HTTP (Apache 2.4.18)) so we may start with web enumeration.
+
+## 2. Web Enumeration
+
+After visiting the website, I identified a parameter that looked interesting:
+<br><img width="757" height="435" alt="browser_jangow01" src="https://github.com/user-attachments/assets/355610a0-d65f-416f-bcc5-b1db7204502f" />
+/site/busque.php?buscar=
+<br><img width="1056" height="70" alt="parameter_url" src="https://github.com/user-attachments/assets/c2e760af-9072-4787-9f79-b187825ec1e8" />
+
+
+
 
 # STEP 2.
 <B>Web Exploration
 
 Visit the website:
-<br><img width="757" height="435" alt="browser_jangow01" src="https://github.com/user-attachments/assets/355610a0-d65f-416f-bcc5-b1db7204502f" />
+
 
 Navigate to discover potential vulnerabilities.<br>
 <b>Discoveries<br>
-<br><img width="1056" height="70" alt="parameter_url" src="https://github.com/user-attachments/assets/c2e760af-9072-4787-9f79-b187825ec1e8" />
+
 <br>when visited the tab Buscar i saw that the url provide a potential entry for parameters/commands so i tested basic input.<br>
 # STEP 3.
 <b>Command Injection<br><li>Testing with: echo test
