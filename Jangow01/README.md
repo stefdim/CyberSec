@@ -153,13 +153,7 @@ password: abygurl69
 Login was successful.
 </p>
 
-<p>
-I listed available files:
-</p>
 
-<pre><code>ls</code></pre>
-
-<img width="919" height="388" alt="image" src="https://github.com/user-attachments/assets/e29f0565-4901-4d8d-b636-9ce79a3aabc6" />
 
 
 <hr>
