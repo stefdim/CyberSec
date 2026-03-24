@@ -16,17 +16,17 @@ netdiscover -i eth0
 ```
 # STEP 1.
 First, I performed a basic Nmap scan to identify open ports and services:
-
-<br><img width="492" height="98" alt="Screenshot 2026-03-23 121055" src="https://github.com/user-attachments/assets/1fc624b5-fd12-4742-b9d7-f45cefab2931" />
-
 ```bash
 nmap -sV 10.0.2.15
-Open Ports
-21 → FTP (vsftpd 3.0.3)
-80 → HTTP (Apache 2.4.18)
 ```
-Since a web service is available, I decided to start with web enumeration.
+<br><img width="492" height="98" alt="Screenshot 2026-03-23 121055" src="https://github.com/user-attachments/assets/1fc624b5-fd12-4742-b9d7-f45cefab2931" />
+Open Ports : 
+<li>21 → FTP (vsftpd 3.0.3)
+<li>80 → HTTP (Apache 2.4.18)
 
+Flag used -> -sV to detect services. We could proceed with more detailed scan but at this point is not necessary since we already found that a web service is available (80 → HTTP (Apache 2.4.18)) so we may start with web enumeration.
+
+# STEP 2.
 Web Exploration
 
 Navigating to the website, I found the following endpoint:
