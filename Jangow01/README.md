@@ -288,7 +288,7 @@ cat proof.txt
 
 <p><strong><img width="1249" height="675" alt="DONE" src="https://github.com/user-attachments/assets/d750311a-1ce4-4a7f-b41d-139e62e17045" />
 </strong></p>
-<br><h3> ROOTED </h3>
+<br><h3>!!! <i>ROOTED</i> !!!</h3>
 <hr>
 
 <h2>Summary</h2>
