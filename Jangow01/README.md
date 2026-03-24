@@ -10,7 +10,7 @@ The goal is to gain user and root access.
 
 First, I performed a basic Nmap scan to identify open ports and services:
 
-bash
+'''bash
 nmap -sV 10.0.2.15
 Open Ports
 21 → FTP (vsftpd 3.0.3)
